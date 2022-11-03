@@ -1,0 +1,13 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+/*
+ * Copyright (c) 2022 Jami Kettunen
+ */
+
+#include "mt6768.dtsi"
+
+/* TODO: address differences between MT6768 and MT6769Z!
+ * - 100MHz faster max speed on small cluster
+ * - update to LPDDR4x-1800 (from LPDDR3-1866)
+ * - 1000 MHz GPU clock (up from 820 MHz)
+ * - ...
+ */
