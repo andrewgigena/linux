@@ -8,6 +8,7 @@
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include <dt-bindings/phy/phy.h>
 #include <dt-bindings/pinctrl/mediatek,mt6768-pinfunc.h>
+#include <dt-bindings/clock/mediatek,mt6768-clk.h>
 
 / {
 	compatible = "mediatek,mt6768";
@@ -218,6 +219,18 @@
 			compatible = "mediatek,mt6768-wdt", "mediatek,mt8183-wdt",
 				     "mediatek,mt6589-wdt";
 			reg = <0 0x10007000 0 0x100>;
+		};
+
+        mmc0: mmc@11230000 {
+			compatible = "mediatek,mt6768-mmc";
+			reg = <0 0x11230000 0 0x1000>,
+			      <0 0x11f50000 0 0x1000>;
+			interrupts = <GIC_SPI 100 IRQ_TYPE_LEVEL_LOW>;
+			clocks = <&topckgen CLK_TOP_MSDC50_0>,
+				 <&infracfg CLK_INFRA_MSDC0>,
+				 <&infracfg CLK_INFRA_MSDC0_SRC>;
+			clock-names = "source", "hclk", "source_cg";
+			status = "disabled";
 		};
 
 		pwrap: pwrap@1000d000 {
