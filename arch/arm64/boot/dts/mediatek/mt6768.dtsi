@@ -128,8 +128,10 @@
 		 * NOTE: /chosen/bootargs has to exist even if unused or
 		 * bootloader will be unhappy, also needs "bootopt=64S3,32N2,64N2"
 		 * on boot.img cmdline to boot 64-bit kernel (adding it here doesn't help)
+		 * FIXME: drop clk_ignore_unused, display looks broken and keeps getting watchdog
+		 *        rebooted without it for now!
 		 */
-		bootargs = "";
+		bootargs = "clk_ignore_unused";
 	};
 
 	reserved-memory {
