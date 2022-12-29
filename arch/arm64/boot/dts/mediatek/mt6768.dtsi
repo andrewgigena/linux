@@ -179,6 +179,12 @@
 			#reset-cells = <1>;
 		};
 
+		apmixed: clock-controller@1000c000 {
+			compatible = "mediatek,mt6768-apmixedsys", "syscon";
+			reg = <0 0x1000c000 0 0x1000>;
+			#clock-cells = <1>;
+		};
+
 		pericfg: clock-controller@10003000 {
 			compatible = "mediatek,mt6768-pericfg", "syscon";
 			reg = <0 0x10003000 0 0x1000>;
