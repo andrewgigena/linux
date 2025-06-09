@@ -1,0 +1,102 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+/*
+ * Device Tree Source for Volla Phone 22 (mimameid)
+ *
+ * Copyright (C) 2022 Jami Kettunen
+ */
+
+/dts-v1/;
+
+#include <dt-bindings/gpio/gpio.h>
+#include "mt6769z.dtsi"
+#include "mt6358.dtsi"
+
+/ {
+	/* NOTE: when /model is defined stock lk bootloader replaces it with "MT6769V/CZ" forcefully :( */
+	model = "Xiaomi Redmi Note 9";
+	compatible = "xiaomi,merlin", "mediatek,mt6769z", "mediatek,mt6768";
+
+	aliases {
+		serial0 = &uart0;
+	};
+
+	chosen {
+		stdout-path = &framebuffer0;
+	};
+
+	/*
+	 * HACK: Use display framebuffer setup by the lk bootloader for simplefb
+	 * FIXME: only text is rendered on VT (TTY) as an unknown bit has to be flipped to disable
+	 *        image compression!
+	 * NOTE: for earlyfb to work you currently need original non-multiboot lk bootloader!
+	 */
+	framebuffer0: framebuffer@7ed58000 {
+		compatible = "simple-framebuffer";
+		reg = <0x0 0x7d9b0000 0x0 0x2250000>;
+		format = "a8r8g8b8";
+		width = <1080>;
+		stride = <((1080 + 8) * 4)>;
+		height = <2340>;
+		/* FIXME: look into clocks from downstream to avoid garbled display after clk_disable_unused:
+		 * - mtkfb_pins_lcm_rst_out1_gpio
+		 * - mtkfb_pins_lcm_rst_out0_gpio
+		 * - mtkfb_pins_lcm_dsi_te
+		 */
+	};
+
+	memory@40000000 {
+		device_type = "memory";
+		reg = <0x0 0x40000000 0x0 0x3e605000>;
+	};
+};
+
+&mt6358keys {
+	key-volume-up {
+		linux,keycodes = <KEY_VOLUMEUP>;
+	};
+};
+
+&mt6358_vdram2_reg {
+	regulator-always-on;
+};
+
+&pmic {
+	interrupts-extended = <&pio 144 IRQ_TYPE_LEVEL_HIGH>;
+};
+
+&uart0 {
+	status = "okay";
+};
+
+&usb2 {
+	status = "okay";
+
+	usb_con: connector {
+		compatible = "usb-c-connector";
+		label = "USB-C";
+	};
+};
+
+&usb2phy {
+	status = "okay";
+};
+
+&keyboard {
+	status = "okay";
+
+	pinctrl-names = "default";
+	pinctrl-0 = <&keyboard_pins>;
+	linux,keymap = <MATRIX_KEY(0x00, 0x00, KEY_VOLUMEDOWN)>;
+	keypad,num-rows = <1>;
+	keypad,num-columns = <1>;
+	debounce-delay-ms = <32>;
+};
+
+&pio {
+	keyboard_pins: keyboard-pins {
+		pins {
+			pinmux = <PINMUX_GPIO92__FUNC_KPROW0>,
+				 <PINMUX_GPIO93__FUNC_KPCOL0>;
+		};
+	};
+};
