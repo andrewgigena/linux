@@ -97,7 +97,7 @@
 	pinctrl-names = "default", "state_uhs";
 	pinctrl-0 = <&mmc0_default_pins>;
 	pinctrl-1 = <&mmc0_uhs_pins>;
-	bus-width = <1>;
+	bus-width = <4>;
 	max-frequency = <200000000>;
 	cap-mmc-highspeed;
 	mmc-hs200-1_8v;
