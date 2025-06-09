@@ -50,12 +50,6 @@
 	};
 };
 
-&mt6358keys {
-	key-volume-up {
-		linux,keycodes = <KEY_VOLUMEUP>;
-	};
-};
-
 &mt6358_vdram2_reg {
 	regulator-always-on;
 };
