@@ -560,5 +560,6 @@
 		lcm_power_gpio = "/dtbo-dummy";
 		mtkfb = "/dtbo-dummy";
 		keypad = "/dtbo-dummy";
+		odm = "/dtbo-dummy";
 	};
 };
