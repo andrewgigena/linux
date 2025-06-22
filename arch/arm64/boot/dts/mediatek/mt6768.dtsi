@@ -347,6 +347,16 @@
 			clocks = <&system_clk>;
 		};
 
+		cirq: interrupt-controller@10204000 {
+			compatible = "mediatek,mt6768-cirq",
+			     "mediatek,mtk-cirq";
+			interrupt-controller;
+			#interrupt-cells = <3>;
+			interrupt-parent = <&sysirq>;
+			reg = <0 0x10204000 0 0x400>;
+			mediatek,ext-irq-range = <64 232>;
+		};
+
         mmc0: mmc@11230000 {
 			compatible = "mediatek,mt6768-mmc";
 			reg = <0 0x11230000 0 0x1000>;
