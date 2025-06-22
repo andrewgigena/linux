@@ -42,6 +42,7 @@
 #define VFF_EN_CLR_B		0
 #define VFF_INT_EN_CLR_B	0
 #define VFF_4G_SUPPORT_CLR_B	0
+#define VFF_ORI_ADDR_BITS_NUM 32
 
 /*
  * interrupt trigger level for tx
@@ -77,7 +78,7 @@
 struct mtk_uart_apdmadev {
 	struct dma_device ddev;
 	struct clk *clk;
-	bool support_33bits;
+	unsigned int support_bits;
 	unsigned int dma_requests;
 };
 
@@ -148,7 +149,7 @@ static void mtk_uart_apdma_start_tx(struct mtk_chan *c)
 		mtk_uart_apdma_write(c, VFF_WPT, 0);
 		mtk_uart_apdma_write(c, VFF_INT_FLAG, VFF_TX_INT_CLR_B);
 
-		if (mtkd->support_33bits)
+		if (mtkd->support_bits > VFF_ORI_ADDR_BITS_NUM)
 			mtk_uart_apdma_write(c, VFF_4G_SUPPORT, VFF_4G_EN_B);
 	}
 
@@ -191,7 +192,7 @@ static void mtk_uart_apdma_start_rx(struct mtk_chan *c)
 		mtk_uart_apdma_write(c, VFF_RPT, 0);
 		mtk_uart_apdma_write(c, VFF_INT_FLAG, VFF_RX_INT_CLR_B);
 
-		if (mtkd->support_33bits)
+		if (mtkd->support_bits > VFF_ORI_ADDR_BITS_NUM)
 			mtk_uart_apdma_write(c, VFF_4G_SUPPORT, VFF_4G_EN_B);
 	}
 
@@ -297,7 +298,7 @@ static int mtk_uart_apdma_alloc_chan_resources(struct dma_chan *chan)
 		goto err_pm;
 	}
 
-	if (mtkd->support_33bits)
+	if (mtkd->support_bits > VFF_ORI_ADDR_BITS_NUM)
 		mtk_uart_apdma_write(c, VFF_4G_SUPPORT, VFF_4G_SUPPORT_CLR_B);
 
 err_pm:
@@ -477,7 +478,7 @@ static int mtk_uart_apdma_probe(struct platform_device *pdev)
 {
 	struct device_node *np = pdev->dev.of_node;
 	struct mtk_uart_apdmadev *mtkd;
-	int bit_mask = 32, rc;
+	int bit_mask, rc;
 	struct mtk_chan *c;
 	unsigned int i;
 
@@ -492,12 +493,10 @@ static int mtk_uart_apdma_probe(struct platform_device *pdev)
 		return rc;
 	}
 
-	if (of_property_read_bool(np, "mediatek,dma-33bits"))
-		mtkd->support_33bits = true;
+	if (of_property_read_u32(np, "mediatek,dma-bits", &bit_mask))
+		bit_mask = 32;
 
-	if (mtkd->support_33bits)
-		bit_mask = 33;
-
+	mtkd->support_bits = bit_mask;
 	rc = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(bit_mask));
 	if (rc)
 		return rc;

@@ -22,6 +22,7 @@ properties:
       - items:
           - enum:
               - mediatek,mt2712-uart-dma
+              - mediatek,mt6768-uart-dma
               - mediatek,mt6795-uart-dma
               - mediatek,mt8365-uart-dma
               - mediatek,mt8516-uart-dma
@@ -56,9 +57,9 @@ properties:
       Number of virtual channels of the UART APDMA controller
     maximum: 16
 
-  mediatek,dma-33bits:
-    type: boolean
-    description: Enable 33-bits UART APDMA support
+  mediatek,dma-bits:
+    maximum: 1
+    description: Enable UART APDMA support for 33 or more bits
 
 required:
   - compatible

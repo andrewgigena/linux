@@ -568,7 +568,7 @@
 			dma-requests = <8>;
 			clocks = <&pericfg CLK_PERI_AP_DMA>;
 			clock-names = "apdma";
-			mediatek,dma-33bits;
+			mediatek,dma-bits = <33>;
 			#dma-cells = <1>;
 		};
 
