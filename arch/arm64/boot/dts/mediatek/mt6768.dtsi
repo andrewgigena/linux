@@ -491,6 +491,7 @@
 				 <&topckgen CLK_TOP_UNIVPLL3_D4>;
 			clock-names = "main", "mcu", "univpll";
 			dr_mode = "otg";
+			usb-role-switch;
 			status = "disabled";
 		};
 
