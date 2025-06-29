@@ -599,30 +599,6 @@ static const struct mtk_gate infra_clks[] = {
 	GATE_INFRA5(CLK_INFRA_CCIF3_MD, "ifr_ccif3_md", "axi_ck", 21),
 };
 
-static const struct mtk_gate_regs vdec1_cg_regs = {
-	.set_ofs = 0x0,
-	.clr_ofs = 0x4,
-	.sta_ofs = 0x0,
-};
-
-static const struct mtk_gate_regs vdec2_cg_regs = {
-	.set_ofs = 0x8,
-	.clr_ofs = 0xC,
-	.sta_ofs = 0x8,
-};
-
-#define GATE_VDEC1(_id, _name, _parent, _shift) \
-	GATE_MTK(_id, _name, _parent, &vdec1_cg_regs, _shift, &mtk_clk_gate_ops_setclr_inv)
-#define GATE_VDEC2(_id, _name, _parent, _shift) \
-	GATE_MTK(_id, _name, _parent, &vdec2_cg_regs, _shift, &mtk_clk_gate_ops_setclr_inv)
-
-static const struct mtk_gate vdec_clks[] = {
-	GATE_VDEC1(CLK_VDEC_CKEN, "vdec_cken", "mm_ck", 0),
-	GATE_VDEC1(CLK_VDEC_ACTIVE, "vdec_active", "mm_ck", 4),
-	GATE_VDEC1(CLK_VDEC_CKEN_ENG, "vdec_cken_eng", "mm_ck", 8),
-	GATE_VDEC2(CLK_VDEC_LARB1_CKEN, "vdec_larb1_cken", "mm_ck", 0),
-};
-
 static const struct mtk_gate_regs cam_cg_regs = {
 	.set_ofs = 0x4,
 	.clr_ofs = 0x8,

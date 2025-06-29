@@ -356,13 +356,6 @@
 #define CLK_IMG_RSC			4
 #define CLK_IMG_NR_CLK			5
 
-/* VDECSYS */
-#define CLK_VDEC_CKEN			0
-#define CLK_VDEC_ACTIVE			1
-#define CLK_VDEC_CKEN_ENG		2
-#define CLK_VDEC_LARB1_CKEN		3
-#define CLK_VDEC_NR_CLK			4
-
 /* CAMSYS */
 #define CLK_CAM_LARB3			0
 #define CLK_CAM_DFP_VAD			1
