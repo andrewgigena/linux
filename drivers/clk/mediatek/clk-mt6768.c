@@ -599,40 +599,6 @@ static const struct mtk_gate infra_clks[] = {
 	GATE_INFRA5(CLK_INFRA_CCIF3_MD, "ifr_ccif3_md", "axi_ck", 21),
 };
 
-static const struct mtk_gate_regs audio0_cg_regs = {
-	.set_ofs = 0x0,
-	.clr_ofs = 0x0,
-	.sta_ofs = 0x0,
-};
-
-static const struct mtk_gate_regs audio1_cg_regs = {
-	.set_ofs = 0x4,
-	.clr_ofs = 0x4,
-	.sta_ofs = 0x4,
-};
-
-#define GATE_AUDIO0(_id, _name, _parent, _shift) \
-	GATE_MTK(_id, _name, _parent, &audio0_cg_regs, _shift, &mtk_clk_gate_ops_no_setclr)
-#define GATE_AUDIO1(_id, _name, _parent, _shift) \
-	GATE_MTK(_id, _name, _parent, &audio1_cg_regs, _shift, &mtk_clk_gate_ops_no_setclr)
-
-static const struct mtk_gate audio_clks[] = {
-	/* AUDIO0 */
-	GATE_AUDIO0(CLK_AUDIO_AFE, "aud_afe", "audio_ck", 2),
-	GATE_AUDIO0(CLK_AUDIO_22M, "aud_22m", "aud_engen1_ck", 8),
-	GATE_AUDIO0(CLK_AUDIO_24M, "aud_24m", "aud_engen1_ck", 9),
-	GATE_AUDIO0(CLK_AUDIO_APLL_TUNER, "aud_apll_tuner", "aud_engen1_ck", 19),
-	GATE_AUDIO0(CLK_AUDIO_ADC, "aud_adc", "audio_ck", 24),
-	GATE_AUDIO0(CLK_AUDIO_DAC, "aud_dac", "audio_ck", 25),
-	GATE_AUDIO0(CLK_AUDIO_DAC_PREDIS, "aud_dac_predis", "audio_ck", 26),
-	GATE_AUDIO0(CLK_AUDIO_TML, "aud_tml", "audio_ck", 27),
-	/* AUDIO1 */
-	GATE_AUDIO1(CLK_AUDIO_I2S1_BCLK, "aud_i2s1_bclk", "audio_ck", 4),
-	GATE_AUDIO1(CLK_AUDIO_I2S2_BCLK, "aud_i2s2_bclk", "audio_ck", 5),
-	GATE_AUDIO1(CLK_AUDIO_I2S3_BCLK, "aud_i2s3_bclk", "audio_ck", 6),
-	GATE_AUDIO1(CLK_AUDIO_I2S4_BCLK, "aud_i2s4_bclk", "audio_ck", 7),
-};
-
 static const struct mtk_gate_regs mm_cg_regs = {
 	.set_ofs = 0x104,
 	.clr_ofs = 0x108,
