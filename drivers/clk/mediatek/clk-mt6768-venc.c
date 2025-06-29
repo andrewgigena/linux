@@ -17,19 +17,19 @@ static const struct mtk_gate_regs venc_cg_regs = {
 #define GATE_VENC(_id, _name, _parent, _shift) \
 	GATE_MTK(_id, _name, _parent, &venc_cg_regs, _shift, &mtk_clk_gate_ops_setclr_inv)
 
-static const struct mtk_gate venc_gates[] = {
+static const struct mtk_gate venc_clks[] = {
 	GATE_VENC(CLK_VENC_SET0_LARB, "venc_set0_larb", "venc_ck", 0),
 	GATE_VENC(CLK_VENC_SET1_VENC, "venc_set1_venc", "venc_ck", 4),
 	GATE_VENC(CLK_VENC_SET2_JPGENC, "jpgenc", "venc_ck", 8),
 };
 
-static const struct mtk_clk_desc venc_clks = {
-	.clks = venc_gates,
-	.num_clks = ARRAY_SIZE(venc_gates),
+static const struct mtk_clk_desc venc_desc = {
+	.clks = venc_clks,
+	.num_clks = ARRAY_SIZE(venc_clks),
 };
 
 static const struct of_device_id of_match_mt6768_venc[] = {
-	{ .compatible = "mediatek,mt6768-vencsys", .data = &venc_clks },
+	{ .compatible = "mediatek,mt6768-vencsys", .data = &venc_desc },
 	{ /* sentinel */ }
 };
 

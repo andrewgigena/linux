@@ -17,18 +17,18 @@ static const struct mtk_gate_regs peri_cg_regs = {
 	.sta_ofs = 0x20C,
 };
 
-static const struct mtk_gate peri_gates[] = {
+static const struct mtk_gate peri_clks[] = {
 	GATE_PERI(CLK_PERIAXI_DISABLE, "periaxi_disable", "axi_ck", 31),
 };
 
-static const struct mtk_clk_desc peri_clks = {
-	.clks = peri_gates,
-	.num_clks = ARRAY_SIZE(peri_gates),
+static const struct mtk_clk_desc peri_desc = {
+	.clks = peri_clks,
+	.num_clks = ARRAY_SIZE(peri_clks),
 };
 
 
 static const struct of_device_id of_match_mt6768_pericfg[] = {
-	{ .compatible = "mediatek,mt6768-pericfg", .data = &peri_clks },
+	{ .compatible = "mediatek,mt6768-pericfg", .data = &peri_desc },
 	{ /* sentinel */ }
 };
 MODULE_DEVICE_TABLE(of, of_match_clk_mt6768_pericfg);
