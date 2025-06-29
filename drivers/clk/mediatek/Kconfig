@@ -293,6 +293,11 @@ config COMMON_CLK_MT6768_VENCSYS
 	  This enables a driver for clocks provided by vencsys
 	  on the MediaTek MT6768 SoC.
 
+config COMMON_CLK_MT6768_MIPI
+       tristate "Clock driver for MediaTek MT6768 mipi"
+       depends on COMMON_CLK_MT6768
+       help
+         This driver supports MediaTek MT6768 mipi clocks.
 
 config COMMON_CLK_MT6779
 	tristate "Clock driver for MediaTek MT6779"
