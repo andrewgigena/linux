@@ -193,6 +193,12 @@ config COMMON_CLK_MT6765_MMSYS
        help
          This driver supports MediaTek MT6765 mmsys clocks.
 
+config COMMON_CLK_MT6768_MMSYS
+       tristate "Clock driver for MediaTek MT6768 mmsys"
+       depends on COMMON_CLK_MT6768
+       help
+         This driver supports MediaTek MT6768 mmsys clocks.
+
 config COMMON_CLK_MT6765_IMGSYS
        tristate "Clock driver for MediaTek MT6765 imgsys"
        depends on COMMON_CLK_MT6765

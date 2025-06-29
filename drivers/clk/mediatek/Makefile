@@ -18,6 +18,7 @@ obj-$(CONFIG_COMMON_CLK_MT6768) += clk-mt6768.o clk-mt6768-pericfg.o
 obj-$(CONFIG_COMMON_CLK_MT6768_AUDIOSYS) += clk-mt6768-audio.o
 obj-$(CONFIG_COMMON_CLK_MT6768_CAMSYS) += clk-mt6768-cam.o
 obj-$(CONFIG_COMMON_CLK_MT6768_IMGSYS) += clk-mt6768-img.o
+obj-$(CONFIG_COMMON_CLK_MT6768_MMSYS) += clk-mt6768-mm.o
 obj-$(CONFIG_COMMON_CLK_MT6768_VDECSYS) += clk-mt6768-vdec.o
 obj-$(CONFIG_COMMON_CLK_MT6768_VENCSYS) += clk-mt6768-venc.o
 obj-$(CONFIG_COMMON_CLK_MT6779) += clk-mt6779.o
