@@ -53,8 +53,6 @@ static int mtk_trng_probe(struct platform_device *pdev)
 	trng->read = mtk_trng_read;
 	trng->quality = 900;
 
-	pr_err("mtk_trng ok\n");
-
 	return devm_hwrng_register(&pdev->dev, trng);
 }
 
