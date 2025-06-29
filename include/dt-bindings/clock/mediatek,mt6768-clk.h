@@ -356,12 +356,6 @@
 #define CLK_IMG_RSC			4
 #define CLK_IMG_NR_CLK			5
 
-/* VENCSYS */
-#define CLK_VENC_SET0_LARB		0
-#define CLK_VENC_SET1_VENC		1
-#define CLK_VENC_SET2_JPGENC		2
-#define CLK_VENC_NR_CLK			3
-
 /* VDECSYS */
 #define CLK_VDEC_CKEN			0
 #define CLK_VDEC_ACTIVE			1

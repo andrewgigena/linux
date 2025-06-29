@@ -599,21 +599,6 @@ static const struct mtk_gate infra_clks[] = {
 	GATE_INFRA5(CLK_INFRA_CCIF3_MD, "ifr_ccif3_md", "axi_ck", 21),
 };
 
-static const struct mtk_gate_regs venc_cg_regs = {
-	.set_ofs = 0x4,
-	.clr_ofs = 0x8,
-	.sta_ofs = 0x0,
-};
-
-#define GATE_VENC(_id, _name, _parent, _shift) \
-	GATE_MTK(_id, _name, _parent, &venc_cg_regs, _shift, &mtk_clk_gate_ops_setclr_inv)
-
-static const struct mtk_gate venc_clks[] = {
-	GATE_VENC(CLK_VENC_SET0_LARB, "venc_set0_larb", "venc_ck", 0),
-	GATE_VENC(CLK_VENC_SET1_VENC, "venc_set1_venc", "venc_ck", 4),
-	GATE_VENC(CLK_VENC_SET2_JPGENC, "jpgenc", "venc_ck", 8),
-};
-
 static const struct mtk_gate_regs vdec1_cg_regs = {
 	.set_ofs = 0x0,
 	.clr_ofs = 0x4,

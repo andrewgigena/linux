@@ -1,0 +1,11 @@
+/* SPDX-License-Identifier: GPL-2.0-only */
+
+#ifndef _DT_BINDINGS_CLK_MT6768_VENCSYS_H
+#define _DT_BINDINGS_CLK_MT6768_VENCSYS_H
+
+#define CLK_VENC_SET0_LARB		0
+#define CLK_VENC_SET1_VENC		1
+#define CLK_VENC_SET2_JPGENC		2
+#define CLK_VENC_NR_CLK			3
+
+#endif /* _DT_BINDINGS_CLK_MT6768_VENCSYS_H */
