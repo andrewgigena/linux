@@ -261,6 +261,12 @@ config COMMON_CLK_MT6768_CAMSYS
        help
          This driver supports MediaTek MT6768 camsys clocks.
 
+config COMMON_CLK_MT6768_IMGSYS
+       tristate "Clock driver for MediaTek MT6768 imgsys"
+       depends on COMMON_CLK_MT6768
+       help
+         This driver supports MediaTek MT6768 imgsys clocks.
+
 config COMMON_CLK_MT6768_VDECSYS
 	tristate "Clock driver for MediaTek MT6768 vdecsys"
 	depends on COMMON_CLK_MT6768

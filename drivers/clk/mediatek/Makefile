@@ -16,6 +16,7 @@ obj-$(CONFIG_COMMON_CLK_MT6765_MMSYS) += clk-mt6765-mm.o
 obj-$(CONFIG_COMMON_CLK_MT6765_VCODECSYS) += clk-mt6765-vcodec.o
 obj-$(CONFIG_COMMON_CLK_MT6768) += clk-mt6768.o clk-mt6768-pericfg.o
 obj-$(CONFIG_COMMON_CLK_MT6768_CAMSYS) += clk-mt6768-cam.o
+obj-$(CONFIG_COMMON_CLK_MT6768_IMGSYS) += clk-mt6768-img.o
 obj-$(CONFIG_COMMON_CLK_MT6768_VDECSYS) += clk-mt6768-vdec.o
 obj-$(CONFIG_COMMON_CLK_MT6768_VENCSYS) += clk-mt6768-venc.o
 obj-$(CONFIG_COMMON_CLK_MT6779) += clk-mt6779.o
