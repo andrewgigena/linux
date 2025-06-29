@@ -599,19 +599,6 @@ static const struct mtk_gate infra_clks[] = {
 	GATE_INFRA5(CLK_INFRA_CCIF3_MD, "ifr_ccif3_md", "axi_ck", 21),
 };
 
-static const struct mtk_gate_regs peri_cg_regs = {
-	.set_ofs = 0x20C,
-	.clr_ofs = 0x20C,
-	.sta_ofs = 0x20C,
-};
-
-#define GATE_PERI(_id, _name, _parent, _shift) \
-	GATE_MTK(_id, _name, _parent, &peri_cg_regs, _shift, &mtk_clk_gate_ops_no_setclr_inv)
-
-static const struct mtk_gate peri_clks[] = {
-	GATE_PERI(CLK_PERIAXI_DISABLE, "periaxi_disable", "axi_ck", 31),
-};
-
 static const struct mtk_gate_regs venc_cg_regs = {
 	.set_ofs = 0x4,
 	.clr_ofs = 0x8,
@@ -1094,18 +1081,6 @@ static int clk_mt6768_infra_probe(struct platform_device *pdev)
 	return r;
 }
 
-static int clk_mt6768_peri_probe(struct platform_device *pdev)
-{
-	struct clk_hw_onecell_data *clk_data;
-	struct device_node *node = pdev->dev.of_node;
-
-	clk_data = mtk_alloc_clk_data(CLK_PERI_NR_CLK);
-
-	mtk_clk_register_gates(&pdev->dev, node, peri_clks, ARRAY_SIZE(peri_clks), clk_data);
-
-	return of_clk_add_hw_provider(node, of_clk_hw_onecell_get, clk_data);
-}
-
 static const struct of_device_id of_match_clk_mt6768[] = {
 	{
 		.compatible = "mediatek,mt6768-apmixedsys",
@@ -1116,9 +1091,6 @@ static const struct of_device_id of_match_clk_mt6768[] = {
 	}, {
 		.compatible = "mediatek,mt6768-infracfg",
 		.data = clk_mt6768_infra_probe,
-	}, {
-		.compatible = "mediatek,mt6768-pericfg",
-		.data = clk_mt6768_peri_probe,
 	}, {
 		/* sentinel */
 	}
