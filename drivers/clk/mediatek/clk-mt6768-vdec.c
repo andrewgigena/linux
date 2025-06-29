@@ -7,7 +7,7 @@
 #include "clk-mtk.h"
 #include "clk-gate.h"
 
-#include <dt-bindings/clock/mediatek,mt6768-vdecsys.h>
+#include <dt-bindings/clock/mediatek,mt6768-clk.h>
 
 static const struct mtk_gate_regs vdec1_cg_regs = {
 	.set_ofs = 0x0,
