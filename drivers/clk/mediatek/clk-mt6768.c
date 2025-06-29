@@ -413,26 +413,41 @@ static const struct mtk_mux top_muxes[] = {
 
 // TODO: do we need TOP0? only TOP1 below
 
-static const struct mtk_gate_regs top_cg_regs = {
+static const struct mtk_gate_regs top0_cg_regs = {
+	.set_ofs = 0x0,
+	.clr_ofs = 0x0,
+	.sta_ofs = 0x0,
+};
+
+static const struct mtk_gate_regs top1_cg_regs = {
 	.set_ofs = 0x104,
 	.clr_ofs = 0x104,
 	.sta_ofs = 0x104,
 };
 
-#define GATE_TOP(_id, _name, _parent, _shift) \
-	GATE_MTK(_id, _name, _parent, &top_cg_regs, _shift, &mtk_clk_gate_ops_no_setclr_inv)
+#define GATE_TOP0(_id, _name, _parent, _shift) \
+	GATE_MTK(_id, _name, _parent, &top0_cg_regs, _shift, &mtk_clk_gate_ops_no_setclr)
+
+#define GATE_TOP1(_id, _name, _parent, _shift) \
+	GATE_MTK(_id, _name, _parent, &top1_cg_regs, _shift, &mtk_clk_gate_ops_no_setclr_inv)
 
 static const struct mtk_gate top_clks[] = {
-	GATE_TOP(CLK_TOP_ARMPLL_DIVIDER_PLL0_EN, "arm_div_pll0_en", "arm_div_pll0", 3),
-	GATE_TOP(CLK_TOP_ARMPLL_DIVIDER_PLL1_EN, "arm_div_pll1_en", "arm_div_pll1", 4),
-	GATE_TOP(CLK_TOP_ARMPLL_DIVIDER_PLL2_EN, "arm_div_pll2_en", "arm_div_pll2", 5),
-	GATE_TOP(CLK_TOP_FMEM_OCC_DRC_EN, "drc_en", "univpll2_d2", 6),
-	GATE_TOP(CLK_TOP_USB20_48M_EN, "usb20_48m_en", "usb20_48m_div", 8),
-	GATE_TOP(CLK_TOP_UNIVPLL_48M_EN, "univpll_48m_en", "univ_48m_div", 9),
-	GATE_TOP(CLK_TOP_MPLL_104M_EN, "mpll_104m_en", "mpll_104m_div", 10),
-	GATE_TOP(CLK_TOP_MPLL_52M_EN, "mpll_52m_en", "mpll_52m_div", 11),
-	GATE_TOP(CLK_TOP_F_UFS_MP_SAP_CFG_EN, "ufs_sap", "f_f26m_ck", 12),
-	GATE_TOP(CLK_TOP_F_BIST2FPC_EN, "bist2fpc", "f_bist2fpc_ck", 16),
+	/* TOP0 */
+	GATE_TOP0(CLK_TOP_MD_32K, "md_32k", "f_frtc_ck", 8),
+	GATE_TOP0(CLK_TOP_MD_26M, "md_26m", "f_f26m_ck", 9),
+	GATE_TOP0(CLK_TOP_MD2_32K, "md2_32k", "f_frtc_ck", 10),
+	GATE_TOP0(CLK_TOP_MD2_26M, "md2_26m", "f_f26m_ck", 11),
+	/* TOP1 */
+	GATE_TOP1(CLK_TOP_ARMPLL_DIVIDER_PLL0_EN, "arm_div_pll0_en", "arm_div_pll0", 3),
+	GATE_TOP1(CLK_TOP_ARMPLL_DIVIDER_PLL1_EN, "arm_div_pll1_en", "arm_div_pll1", 4),
+	GATE_TOP1(CLK_TOP_ARMPLL_DIVIDER_PLL2_EN, "arm_div_pll2_en", "arm_div_pll2", 5),
+	GATE_TOP1(CLK_TOP_FMEM_OCC_DRC_EN, "drc_en", "univpll2_d2", 6),
+	GATE_TOP1(CLK_TOP_USB20_48M_EN, "usb20_48m_en", "usb20_48m_div", 8),
+	GATE_TOP1(CLK_TOP_UNIVPLL_48M_EN, "univpll_48m_en", "univ_48m_div", 9),
+	GATE_TOP1(CLK_TOP_MPLL_104M_EN, "mpll_104m_en", "mpll_104m_div", 10),
+	GATE_TOP1(CLK_TOP_MPLL_52M_EN, "mpll_52m_en", "mpll_52m_div", 11),
+	GATE_TOP1(CLK_TOP_F_UFS_MP_SAP_CFG_EN, "ufs_sap", "f_f26m_ck", 12),
+	GATE_TOP1(CLK_TOP_F_BIST2FPC_EN, "bist2fpc", "f_bist2fpc_ck", 16),
 };
 
 static const struct mtk_gate_regs infra0_cg_regs = {
