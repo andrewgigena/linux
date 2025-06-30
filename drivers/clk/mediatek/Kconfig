@@ -261,6 +261,12 @@ config COMMON_CLK_MT6768
        help
          This driver supports MediaTek MT6768 basic clocks.
 
+config COMMON_CLK_MT6768_MFGCFG
+	tristate "Clock driver for MediaTek MT6768 mfgcfg"
+	depends on COMMON_CLK_MT6768
+	help
+	  This driver supports MediaTek MT6768 mfgcfg clocks.
+
 config COMMON_CLK_MT6768_AUDIOSYS
        tristate "Clock driver for MediaTek MT6768 audiosys"
        depends on COMMON_CLK_MT6768

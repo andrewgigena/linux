@@ -599,19 +599,6 @@ static const struct mtk_gate infra_clks[] = {
 	GATE_INFRA5(CLK_INFRA_CCIF3_MD, "ifr_ccif3_md", "axi_ck", 21),
 };
 
-static const struct mtk_gate_regs mfgcfg_cg_regs = {
-	.set_ofs = 0x4,
-	.clr_ofs = 0x8,
-	.sta_ofs = 0x0,
-};
-
-#define GATE_MFGCFG(_id, _name, _parent, _shift) \
-	GATE_MTK(_id, _name, _parent, &mfgcfg_cg_regs, _shift, &mtk_clk_gate_ops_setclr)
-
-static const struct mtk_gate mfgcfg_clks[] = {
-	GATE_MFGCFG(CLK_MFGCFG_BG3D, "mfgcfg_bg3d", "mfg_ck", 0),
-};
-
 static const struct mtk_gate_regs gce_cg_regs = {
 	.set_ofs = 0xf0,
 	.clr_ofs = 0xf0,
