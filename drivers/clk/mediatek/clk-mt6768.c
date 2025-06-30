@@ -599,41 +599,6 @@ static const struct mtk_gate infra_clks[] = {
 	GATE_INFRA5(CLK_INFRA_CCIF3_MD, "ifr_ccif3_md", "axi_ck", 21),
 };
 
-static const struct mtk_gate_regs gce_cg_regs = {
-	.set_ofs = 0xf0,
-	.clr_ofs = 0xf0,
-	.sta_ofs = 0xf0,
-};
-
-#define GATE_GCE(_id, _name, _parent, _shift) \
-	GATE_MTK(_id, _name, _parent, &gce_cg_regs, _shift, &mtk_clk_gate_ops_no_setclr)
-
-static const struct mtk_gate gce_clks[] = {
-	GATE_GCE(CLK_GCE, "gce", "axi_ck", 16),
-};
-
-static const struct mtk_gate_regs apmixed_cg_regs = {
-	.set_ofs = 0x14,
-	.clr_ofs = 0x14,
-	.sta_ofs = 0x14,
-};
-
-#define GATE_APMIXED(_id, _name, _parent, _shift) \
-	GATE_MTK(_id, _name, _parent, &apmixed_cg_regs, _shift, &mtk_clk_gate_ops_no_setclr_inv)
-
-static const struct mtk_gate apmixed_clks[] = {
-	GATE_APMIXED(CLK_APMIXED_SSUSB26M, "apmixed_ssusb26m", "f_f26m_ck", 4),
-	GATE_APMIXED(CLK_APMIXED_APPLL26M, "apmixed_appll26m", "f_f26m_ck", 5),
-	GATE_APMIXED(CLK_APMIXED_MIPIC0_26M, "apmixed_mipic026m", "f_f26m_ck", 6),
-	GATE_APMIXED(CLK_APMIXED_MDPLLGP26M, "apmixed_mdpll26m", "f_f26m_ck", 7),
-	GATE_APMIXED(CLK_APMIXED_MMSYS_F26M, "apmixed_mmsys26m", "f_f26m_ck", 8),
-	GATE_APMIXED(CLK_APMIXED_UFS26M, "apmixed_ufs26m", "f_f26m_ck", 9),
-	GATE_APMIXED(CLK_APMIXED_MIPIC1_26M, "apmixed_mipic126m", "f_f26m_ck", 11),
-	GATE_APMIXED(CLK_APMIXED_MEMPLL26M, "apmixed_mempll26m", "f_f26m_ck", 13),
-	GATE_APMIXED(CLK_APMIXED_CLKSQ_LVPLL_26M, "apmixed_lvpll26m", "f_f26m_ck", 14),
-	GATE_APMIXED(CLK_APMIXED_MIPID0_26M, "apmixed_mipid026m", "f_f26m_ck", 16),
-};
-
 static const char * const i2s0_m_ck_parents[] = {
 	"aud_1_sel",
 };
@@ -676,93 +641,6 @@ static const struct mtk_clk_rst_desc clk_rst_desc = {
 	.rst_bank_ofs = infra_rst_ofs,
 	.rst_bank_nr = ARRAY_SIZE(infra_rst_ofs),
 };
-
-#define MT6768_PLL_FMAX		(3800UL * MHZ)
-#define MT6768_PLL_FMIN		(1500UL * MHZ)
-#define MT6768_INTEGER_BITS	8
-
-#define CON0_MT6768_RST_BAR	BIT(23)
-#define CON0_MT6768_EN_MASK	BIT(0)
-
-#define PLL(_id, _name, _reg, _pwr_reg, _flags, _pcwbits, _pd_reg, _pd_shift, _tuner_reg,	\
-	    _tuner_en_reg, _tuner_en_bit, _pcw_reg, _pcw_shift) {				\
-		.id = _id,									\
-		.name = _name,									\
-		.reg = _reg,									\
-		.pwr_reg = _pwr_reg,								\
-		.en_mask = CON0_MT6768_EN_MASK,							\
-		.flags = _flags,								\
-		.rst_bar_mask = CON0_MT6768_RST_BAR,						\
-		.fmax = MT6768_PLL_FMAX,							\
-		.fmin = MT6768_PLL_FMIN,							\
-		.pcwbits = _pcwbits,								\
-		.pcwibits = MT6768_INTEGER_BITS,						\
-		.pd_reg = _pd_reg,								\
-		.pd_shift = _pd_shift,								\
-		.tuner_reg = _tuner_reg,							\
-		.tuner_en_reg = _tuner_en_reg,							\
-		.tuner_en_bit = _tuner_en_bit,							\
-		.pcw_reg = _pcw_reg,								\
-		.pcw_shift = _pcw_shift,							\
-	}
-
-static const struct mtk_pll_data plls[] = {
-	PLL(CLK_APMIXED_ARMPLL, "armpll", 0x0208, 0x0214,
-	    PLL_AO, 22, 0x020C, 24, 0, 0, 0, 0x020C, 0),
-	PLL(CLK_APMIXED_ARMPLL_L, "armpll_l", 0x0218, 0x0224,
-	    PLL_AO, 22, 0x021C, 24, 0, 0, 0, 0x021C, 0),
-	PLL(CLK_APMIXED_CCIPLL, "ccipll", 0x0228, 0x0234,
-	    PLL_AO, 22, 0x022C, 24, 0, 0, 0, 0x022C, 0),
-	PLL(CLK_APMIXED_UNIV2PLL, "univ2pll", 0x0238, 0x0244,
-	    HAVE_RST_BAR, 22, 0x023C, 24, 0, 0, 0, 0x023C, 0),
-	PLL(CLK_APMIXED_MFGPLL, "mfgpll", 0x0248, 0x0254,
-	    HAVE_RST_BAR, 22, 0x024C, 24, 0, 0, 0, 0x024C, 0),
-
-	PLL(CLK_APMIXED_MAINPLL, "mainpll", 0x0258, 0x0264,
-	    PLL_AO, 22, 0x025C, 24, 0, 0, 0, 0x025C, 0),
-	/* APLL pcw is at 0x310, postdiv at 0x30c. Also, it has turner regs.*/
-	PLL(CLK_APMIXED_APLL1, "apll1", 0x0308, 0x0318,
-	    HAVE_RST_BAR, 32, 0x030C, 24, 0x0040, 0x000C, 0, 0x0310, 0),
-	PLL(CLK_APMIXED_MMPLL, "mmpll", 0x031C, 0x0328,
-	    HAVE_RST_BAR, 22, 0x0320, 24, 0, 0, 0, 0x0320, 0),
-	PLL(CLK_APMIXED_MPLL, "mpll", 0x032C, 0x0338,
-	    PLL_AO, 22, 0x0330, 24, 0, 0, 0, 0x0330, 0),
-	PLL(CLK_APMIXED_MSDCPLL, "msdcpll", 0x033C, 0x0348,
-	    HAVE_RST_BAR, 22, 0x0320, 24, 0, 0, 0, 0x0340, 0),
-};
-
-static int clk_mt6768_apmixed_probe(struct platform_device *pdev)
-{
-	struct clk_hw_onecell_data *clk_data;
-	struct device_node *node = pdev->dev.of_node;
-	int r;
-
-	clk_data = mtk_alloc_clk_data(CLK_APMIXED_NR_CLK);
-	if (!clk_data)
-		return -ENOMEM;
-
-	r = mtk_clk_register_plls(node, plls, ARRAY_SIZE(plls), clk_data);
-	if (r)
-		goto free_apmixed_data;
-
-	r = mtk_clk_register_gates(&pdev->dev, node, apmixed_clks, ARRAY_SIZE(apmixed_clks), clk_data);
-	if (r)
-		goto unregister_plls;
-
-	r = of_clk_add_hw_provider(node, of_clk_hw_onecell_get, clk_data);
-	if (r)
-		goto unregister_gates;
-
-	return 0;
-
-unregister_gates:
-	mtk_clk_unregister_gates(apmixed_clks, ARRAY_SIZE(apmixed_clks), clk_data);
-unregister_plls:
-	mtk_clk_unregister_plls(plls, ARRAY_SIZE(plls), clk_data);
-free_apmixed_data:
-	mtk_free_clk_data(clk_data);
-	return r;
-}
 
 static struct clk_hw_onecell_data *top_clk_data;
 
@@ -837,9 +715,6 @@ static int clk_mt6768_infra_probe(struct platform_device *pdev)
 
 static const struct of_device_id of_match_clk_mt6768[] = {
 	{
-		.compatible = "mediatek,mt6768-apmixedsys",
-		.data = clk_mt6768_apmixed_probe,
-	}, {
 		.compatible = "mediatek,mt6768-topckgen",
 		.data = clk_mt6768_top_probe,
 	}, {
