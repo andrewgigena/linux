@@ -126,6 +126,7 @@ static int scpsys_sram_disable(struct scpsys_domain *pd)
 static struct regmap *scpsys_bus_protect_get_regmap(struct scpsys_domain *pd,
 						    const struct scpsys_bus_prot_data *bpd)
 {
+	pr_err("using %s regmap\n", bpd->flags & BUS_PROT_COMPONENT_SMI ? "SMI" : "INFRA");
 	if (bpd->flags & BUS_PROT_COMPONENT_SMI)
 		return pd->smi;
 	else
@@ -151,6 +152,9 @@ static int scpsys_bus_protect_clear(struct scpsys_domain *pd,
 	u32 val;
 
 	expected_ack = (bpd->flags & BUS_PROT_STA_COMPONENT_INFRA_NAO ? sta_mask : 0);
+
+	pr_err("REG: %x\n", bpd->bus_prot_clr);
+	pr_err("is regmap non-null? %s\n", !!regmap ? "yes" : "no");
 
 	if (bpd->flags & BUS_PROT_REG_UPDATE)
 		regmap_clear_bits(regmap, bpd->bus_prot_clr, bpd->bus_prot_set_clr_mask);
