@@ -21,8 +21,8 @@
 			MT8183_TOP_AXI_PROT_EN_1_CLR,              \
 			MT8183_TOP_AXI_PROT_EN_STA1_1)
 
-#define BUS_PROT_SMI_NOACK(mask)                           \
-	BUS_PROT_WR(SMI, MT8183_SMI_COMMON_SMI_CLAMP_DISP, \
+#define BUS_PROT_SMI(mask)                           \
+	BUS_PROT_WR(SMI, mask, \
 		    MT8183_SMI_COMMON_CLAMP_EN_SET,        \
 		    MT8183_SMI_COMMON_CLAMP_EN_CLR,        \
 		    MT8183_SMI_COMMON_CLAMP_EN)
@@ -110,7 +110,7 @@ static const struct scpsys_domain_data scpsys_domain_data_mt6768[] = {
 		.sram_pdn_bits = GENMASK(8, 8),
 		.sram_pdn_ack_bits = GENMASK(12, 12),
 		.bp_cfg = {
-			BUS_PROT_SMI_NOACK(BIT(2)),
+			BUS_PROT_SMI(BIT(2)),
 			BUS_PROT_INFRA_NOACK(BIT(20))
 		},
 	},
@@ -162,7 +162,7 @@ static const struct scpsys_domain_data scpsys_domain_data_mt6768[] = {
 		.sram_pdn_ack_bits = GENMASK(12, 12),
 		.bp_cfg = {
 			BUS_PROT_INFRA_NOACK(BIT(20)),
-			BUS_PROT_SMI_NOACK(BIT(3)),
+			BUS_PROT_SMI(BIT(3)),
 			BUS_PROT_INFRA_NOACK_1(BIT(19) | BIT(21))
 		},
 	},
@@ -175,7 +175,7 @@ static const struct scpsys_domain_data scpsys_domain_data_mt6768[] = {
 		.sram_pdn_bits = GENMASK(8, 8),
 		.sram_pdn_ack_bits = GENMASK(12, 12),
 		.bp_cfg = {
-			BUS_PROT_SMI_NOACK(BIT(4)),
+			BUS_PROT_SMI(BIT(4)),
 			BUS_PROT_INFRA_NOACK_1(BIT(31)),
 		},
 	},
@@ -188,7 +188,7 @@ static const struct scpsys_domain_data scpsys_domain_data_mt6768[] = {
 		.sram_pdn_bits = GENMASK(8, 8),
 		.sram_pdn_ack_bits = GENMASK(12, 12),
 		.bp_cfg = {
-			BUS_PROT_SMI_NOACK(BIT(1)),
+			BUS_PROT_SMI(BIT(1)),
 			BUS_PROT_INFRA_NOACK_1(BIT(30)),
 		},
 	},
