@@ -185,6 +185,29 @@
 	};
 };
 
+&spi3 {
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+	mediatek,pad-select = <0>;
+
+	cs35l41: speaker-amp@0 {
+		#sound-dai-cells = <1>;
+		compatible = "cirrus,cs35l41";
+		reg = <0>;
+		spi-max-frequency = <4000000>;
+		interrupt-parent = <&pio>;
+		interrupts = <80 IRQ_TYPE_LEVEL_LOW>;
+		reset-gpios = <&pio 79 GPIO_ACTIVE_HIGH>;
+
+		cirrus,boost-peak-milliamp = <4500>;
+		cirrus,boost-ind-nanohenry = <1000>;
+		cirrus,boost-cap-microfarad = <15>;
+		cirrus,gpio2-src-select = <4>;
+		cirrus,gpio2-output-enable;
+        };
+};
+
 &pio {
 	keyboard_pins: keyboard-pins {
 		pins {
