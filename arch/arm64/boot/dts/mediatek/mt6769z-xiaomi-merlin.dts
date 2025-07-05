@@ -65,9 +65,11 @@
 &usb2 {
 	status = "okay";
 
-	usb_con: connector {
-		compatible = "usb-c-connector";
-		label = "USB-C";
+	// In fact this should be under usb2port0...
+	port {
+		usb2phy_port: endpoint {
+			remote-endpoint = <&usb_typec>;
+		};
 	};
 };
 
@@ -126,6 +128,43 @@
 
 	vmmc-supply = <&mt6358_vmch_reg>;
 	vqmcc-suppply = <&mt6358_vmc_reg>;
+};
+
+&i2c7 {
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+	clock-frequency = <400000>;
+
+	tcpc@60 {
+		compatible = "willsemi,wusb3801";
+		reg = <0x60>;
+		interrupt-parent = <&pio>;
+		interrupts = <41 IRQ_TYPE_LEVEL_LOW>;
+
+		connector {
+			compatible = "usb-c-connector";
+			label = "USB-C";
+			power-role = "dual";
+			try-power-role = "sink";
+			data-role = "dual";
+			typec-power-opmode = "3.0A";
+			pd-disable;
+
+			ports {
+				#address-cells = <1>;
+				#size-cells = <0>;
+
+				port@0 {
+					reg = <0x00>;
+
+					usb_typec: endpoint {
+						remote-endpoint = <&usb2phy_port>;
+					};
+				};
+			};
+		};
+	};
 };
 
 &pio {
