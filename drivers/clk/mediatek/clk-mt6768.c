@@ -3,6 +3,7 @@
  * Copyright (C) 2018 MediaTek Inc.
  * Copyright (C) 2022 Luka Panio.
  * Copyright (C) 2022 Jami Kettunen
+ * Copyright (c) 2025 Max Shevchenko
  */
 
 #include <linux/delay.h>

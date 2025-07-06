@@ -1,6 +1,7 @@
-// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+// SPDX-License-Identifier: GPL-2.0-only
 /*
  * Copyright (c) 2022 Jami Kettunen
+ * Copyright (c) 2025 Max Shevchenko
  */
 
 #include "mt6768.dtsi"
@@ -10,4 +11,8 @@
  * - update to LPDDR4x-1800 (from LPDDR3-1866)
  * - 1000 MHz GPU clock (up from 820 MHz)
  * - ...
+ *
+ * TODO: due to how mediatek calls their devicetrees (mt6768.dts for every SoC in MT6768 family),
+ * we should take actual MT6768 device and MT6769Z (ideally, from the same vendor)
+ * and check the differences in the dts itself and the drivers
  */

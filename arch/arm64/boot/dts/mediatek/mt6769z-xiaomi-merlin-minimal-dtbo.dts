@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+// SPDX-License-Identifier: GPL-2.0-only
 /*
  * Minimal DTBO to pass lk bootloader checks on Xiaomi Redmi Note 9 / MT6769Z
  *
@@ -6,6 +6,7 @@
  * navigation with volume/power buttons
  *
  * Copyright (C) 2022 Jami Kettunen
+ * Copyright (c) 2025 Max Shevchenko
  */
 /dts-v1/;
 

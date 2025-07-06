@@ -1,6 +1,7 @@
-// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+// SPDX-License-Identifier: GPL-2.0-only
 /*
  * Copyright (c) 2022 Jami Kettunen
+ * Copyright (c) 2025 Max Shevchenko
  */
 
 #include <dt-bindings/clock/mediatek,mt6768-clk.h>

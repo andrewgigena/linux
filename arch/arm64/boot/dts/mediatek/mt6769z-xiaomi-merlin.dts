@@ -1,8 +1,9 @@
-// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+// SPDX-License-Identifier: GPL-2.0-only
 /*
- * Device Tree Source for Volla Phone 22 (mimameid)
+ * Device Tree Source for Xiaomi Redmi Note 9
  *
  * Copyright (C) 2022 Jami Kettunen
+ * Copyright (c) 2025 Max Shevchenko
  */
 
 /dts-v1/;
