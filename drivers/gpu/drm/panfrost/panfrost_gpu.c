@@ -222,7 +222,7 @@ static const struct panfrost_model gpu_models[] = {
 	GPU_MODEL(g72, 0x6001),
 	GPU_MODEL(g51, 0x7000),
 	GPU_MODEL(g76, 0x7001),
-	GPU_MODEL(g52, 0x7002),
+	GPU_MODEL(G52, 0x7002),
 	GPU_MODEL(g31, 0x7003,
 		GPU_REV(g31, 1, 0)),
 
@@ -330,7 +330,7 @@ static void panfrost_gpu_init_features(struct panfrost_device *pfdev)
 	bitmap_from_u64(pfdev->features.hw_features, hw_feat);
 	bitmap_from_u64(pfdev->features.hw_issues, hw_issues);
 
-	dev_info(pfdev->dev, "mali-%s id 0x%x major 0x%x minor 0x%x status 0x%x",
+	dev_info(pfdev->dev, "Mali-%s id 0x%x major 0x%x minor 0x%x status 0x%x",
 		 name, gpu_id, major, minor, status);
 	dev_info(pfdev->dev, "features: %64pb, issues: %64pb",
 		 pfdev->features.hw_features,
