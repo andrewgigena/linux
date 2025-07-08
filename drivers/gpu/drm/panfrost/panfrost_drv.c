@@ -791,7 +791,7 @@ static const struct panfrost_compatible amlogic_data = {
 };
 
 // TODO: verify and make coupled regulators instead
-static const char * const mediatek_mt6768_supplies[] = { "mali", "sram", NULL };
+static const char * const mediatek_mt6768_supplies[] = { "mali", NULL };
 static const char * const mediatek_mt6768_pm_domains[] = { "core0", "core1" };
 static const struct panfrost_compatible mediatek_mt6768_data = {
 	.num_supplies = ARRAY_SIZE(mediatek_mt6768_supplies) - 1,
