@@ -251,8 +251,6 @@
 		/* TODO: add useful non-mblock nodes from downstream! */
 	};
 
-	// TODO: opp is partial
-
 	gpu_opp_table: opp-table-0 {
 		compatible = "operating-points-v2";
 		opp-shared;
@@ -335,6 +333,86 @@
 		opp-586000000 {
 			opp-hz = /bits/ 64 <586000000>;
 			opp-microvolt = <700000>;
+		};
+
+		opp-611000000 {
+			opp-hz = /bits/ 64 <611000000>;
+			opp-microvolt = <706250>;
+		};
+
+		opp-637000000 {
+			opp-hz = /bits/ 64 <637000000>;
+			opp-microvolt = <712500>;
+		};
+
+		opp-663000000 {
+			opp-hz = /bits/ 64 <663000000>;
+			opp-microvolt = <725000>;
+		};
+
+		opp-690000000 {
+			opp-hz = /bits/ 64 <690000000>;
+			opp-microvolt = <737500>;
+		};
+
+		opp-716000000 {
+			opp-hz = /bits/ 64 <716000000>;
+			opp-microvolt = <750000>;
+		};
+
+		opp-743000000 {
+			opp-hz = /bits/ 64 <743000000>;
+			opp-microvolt = <756250>;
+		};
+
+		opp-769000000 {
+			opp-hz = /bits/ 64 <769000000>;
+			opp-microvolt = <768750>;
+		};
+
+		opp-796000000 {
+			opp-hz = /bits/ 64 <796000000>;
+			opp-microvolt = <781250>;
+		};
+
+		opp-823000000 {
+			opp-hz = /bits/ 64 <823000000>;
+			opp-microvolt = <793750>;
+		};
+
+		opp-850000000 {
+			opp-hz = /bits/ 64 <850000000>;
+			opp-microvolt = <800000>;
+		};
+
+		opp-875000000 {
+			opp-hz = /bits/ 64 <875000000>;
+			opp-microvolt = <825000>;
+		};
+
+		opp-900000000 {
+			opp-hz = /bits/ 64 <900000000>;
+			opp-microvolt = <850000>;
+		};
+
+		opp-925000000 {
+			opp-hz = /bits/ 64 <925000000>;
+			opp-microvolt = <875000>;
+		};
+
+		opp-950000000 {
+			opp-hz = /bits/ 64 <950000000>;
+			opp-microvolt = <900000>;
+		};
+
+		opp-975000000 {
+			opp-hz = /bits/ 64 <975000000>;
+			opp-microvolt = <925000>;
+		};
+
+		opp-1000000000 {
+			opp-hz = /bits/ 64 <1000000000>;
+			opp-microvolt = <950000>;
 		};
 	};
 
