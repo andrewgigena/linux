@@ -3,6 +3,7 @@
 /* Copyright 2019 Linaro, Ltd., Rob Herring <robh@kernel.org> */
 /* Copyright 2019 Collabora ltd. */
 
+#include "linux/stddef.h"
 #ifdef CONFIG_ARM_ARCH_TIMER
 #include <asm/arch_timer.h>
 #endif
@@ -789,6 +790,18 @@ static const struct panfrost_compatible amlogic_data = {
 	.vendor_quirk = panfrost_gpu_amlogic_quirk,
 };
 
+// TODO: verify and make coupled regulators instead
+static const char * const mediatek_mt6768_supplies[] = { "mali", "sram", NULL };
+static const char * const mediatek_mt6768_pm_domains[] = { "core0", "core1" };
+static const struct panfrost_compatible mediatek_mt6768_data = {
+	.num_supplies = ARRAY_SIZE(mediatek_mt6768_supplies) - 1,
+	.supply_names = mediatek_mt6768_supplies,
+	.num_pm_domains = ARRAY_SIZE(mediatek_mt6768_pm_domains),
+	.pm_domain_names = mediatek_mt6768_pm_domains,
+	.pm_features = BIT(GPU_PM_CLK_DIS) | BIT(GPU_PM_VREG_OFF), // probably
+};
+
+
 /*
  * The old data with two power supplies for MT8183 is here only to
  * keep retro-compatibility with older devicetrees, as DVFS will
@@ -863,6 +876,7 @@ static const struct of_device_id dt_match[] = {
 	{ .compatible = "arm,mali-t880", .data = &default_data, },
 	{ .compatible = "arm,mali-bifrost", .data = &default_data, },
 	{ .compatible = "arm,mali-valhall-jm", .data = &default_data, },
+	{ .compatible = "mediatek,mt6768-mali", .data = &mediatek_mt6768_data },
 	{ .compatible = "mediatek,mt8183-mali", .data = &mediatek_mt8183_data },
 	{ .compatible = "mediatek,mt8183b-mali", .data = &mediatek_mt8183_b_data },
 	{ .compatible = "mediatek,mt8186-mali", .data = &mediatek_mt8186_data },

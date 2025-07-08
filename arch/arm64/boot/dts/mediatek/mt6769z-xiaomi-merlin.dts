@@ -131,6 +131,21 @@
 	vqmcc-suppply = <&mt6358_vmc_reg>;
 };
 
+&gpu {
+	mali-supply = <&mt6358_vgpu_reg>;
+	sram-supply = <&mt6358_vsram_gpu_reg>;
+
+};
+
+&mt6358_vgpu_reg {
+	regulator-max-microvolt = <950000>;
+};
+
+&mt6358_vsram_gpu_reg {
+	regulator-min-microvolt = <850000>;
+	regulator-max-microvolt = <1050000>;
+};
+
 &i2c3 {
 	status = "okay";
 	#address-cells = <1>;

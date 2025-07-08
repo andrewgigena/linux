@@ -240,7 +240,7 @@
 		 * FIXME: drop clk_ignore_unused, display looks broken and keeps getting watchdog
 		 *        rebooted without it for now!
 		 */
-		bootargs = "clk_ignore_unused pd_ignore_unused";
+		bootargs = "clk_ignore_unused pd_ignore_unused regulator_ignore_unused";
 	};
 
 	reserved-memory {
@@ -249,6 +249,93 @@
 		ranges;
 
 		/* TODO: add useful non-mblock nodes from downstream! */
+	};
+
+	// TODO: opp is partial
+
+	gpu_opp_table: opp-table-0 {
+		compatible = "operating-points-v2";
+		opp-shared;
+
+		opp-299000000 {
+			opp-hz = /bits/ 64 <299000000>;
+			opp-microvolt = <612500>;
+		};
+
+		opp-315000000 {
+			opp-hz = /bits/ 64 <315000000>;
+			opp-microvolt = <618750>;
+		};
+
+		opp-332000000 {
+			opp-hz = /bits/ 64 <332000000>;
+			opp-microvolt = <625000>;
+		};
+
+		opp-349000000 {
+			opp-hz = /bits/ 64 <349000000>;
+			opp-microvolt = <631250>;
+		};
+
+		opp-366000000 {
+			opp-hz = /bits/ 64 <366000000>;
+			opp-microvolt = <637500>;
+		};
+
+		opp-383000000 {
+			opp-hz = /bits/ 64 <383000000>;
+			opp-microvolt = <643750>;
+		};
+
+		opp-400000000 {
+			opp-hz = /bits/ 64 <400000000>;
+			opp-microvolt = <643750>;
+		};
+
+		opp-417000000 {
+			opp-hz = /bits/ 64 <417000000>;
+			opp-microvolt = <650000>;
+		};
+
+		opp-434000000 {
+			opp-hz = /bits/ 64 <434000000>;
+			opp-microvolt = <656250>;
+		};
+
+		opp-450000000 {
+			opp-hz = /bits/ 64 <450000000>;
+			opp-microvolt = <662500>;
+		};
+
+		opp-467000000 {
+			opp-hz = /bits/ 64 <467000000>;
+			opp-microvolt = <668750>;
+		};
+
+		opp-484000000 {
+			opp-hz = /bits/ 64 <484000000>;
+			opp-microvolt = <668750>;
+		};
+
+		opp-509000000 {
+			opp-hz = /bits/ 64 <509000000>;
+			opp-microvolt = <681250>;
+		};
+
+		opp-535000000 {
+			opp-hz = /bits/ 64 <535000000>;
+			opp-microvolt = <687500>;
+		};
+
+		opp-560000000 {
+			opp-hz = /bits/ 64 <560000000>;
+			opp-microvolt = <693750>;
+		};
+
+		opp-586000000 {
+			opp-hz = /bits/ 64 <586000000>;
+			opp-microvolt = <700000>;
+		};
 	};
 
 	clocks {
@@ -529,12 +616,31 @@
 			power-domains = <&spm MT6768_POWER_DOMAIN_DISP>;
 		};
 
-		/*mfgcfg: clock-controller@13000000 {
+		mfgcfg: clock-controller@13000000 {
 			compatible = "mediatek,mt6768-mfgcfg", "syscon";
 			reg = <0 0x13000000 0 0x1000>;
 			#clock-cells = <1>;
 			power-domains = <&spm MT6768_POWER_DOMAIN_MFG_ASYNC>;
-		};*/
+		};
+
+		gpu: gpu@13040000 {
+			compatible = "mediatek,mt6768-mali", "arm,mali-bifrost";
+			reg = <0 0x13040000 0 0x4000>;
+			interrupts =
+				<GIC_SPI 276 IRQ_TYPE_LEVEL_LOW>,
+				<GIC_SPI 275 IRQ_TYPE_LEVEL_LOW>,
+				<GIC_SPI 274 IRQ_TYPE_LEVEL_LOW>;
+			interrupt-names = "job", "mmu", "gpu";
+
+			clocks = <&mfgcfg CLK_MFGCFG_BG3D>;
+
+			power-domains =
+				<&spm MT6768_POWER_DOMAIN_MFG_CORE0>,
+				<&spm MT6768_POWER_DOMAIN_MFG_CORE1>;
+			power-domain-names = "core0", "core1";
+
+			operating-points-v2 = <&gpu_opp_table>;
+		};
 
 		mmsys: clock-controller@14000000 {
 			compatible = "mediatek,mt6768-mmsys", "syscon";
