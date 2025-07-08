@@ -240,7 +240,7 @@
 		 * FIXME: drop clk_ignore_unused, display looks broken and keeps getting watchdog
 		 *        rebooted without it for now!
 		 */
-		bootargs = "clk_ignore_unused pd_ignore_unused regulator_ignore_unused";
+		bootargs = "clk_ignore_unused pd_ignore_unused";
 	};
 
 	reserved-memory {
@@ -620,13 +620,13 @@
 					#power-domain-cells = <0>;
 				};
 
-				power-domain@MT6768_POWER_DOMAIN_MFG_ASYNC {
+				mfg_async: power-domain@MT6768_POWER_DOMAIN_MFG_ASYNC {
 					reg = <MT6768_POWER_DOMAIN_MFG_ASYNC>;
 					#address-cells = <1>;
 					#size-cells = <0>;
 					#power-domain-cells = <1>;
 
-					power-domain@MT6768_POWER_DOMAIN_MFG {
+					mfg: power-domain@MT6768_POWER_DOMAIN_MFG {
 						reg = <MT6768_POWER_DOMAIN_MFG>;
 						#address-cells = <1>;
 						#size-cells = <0>;

@@ -138,6 +138,8 @@
 
 &mt6358_vgpu_reg {
 	regulator-max-microvolt = <950000>;
+	regulator-always-on;
+	regulator-boot-on;
 
 	regulator-coupled-with = <&mt6358_vsram_gpu_reg>;
 	regulator-coupled-max-spread = <100000>;
@@ -146,9 +148,19 @@
 &mt6358_vsram_gpu_reg {
 	regulator-min-microvolt = <850000>;
 	regulator-max-microvolt = <1050000>;
+	regulator-always-on;
+	regulator-boot-on;
 
 	regulator-coupled-with = <&mt6358_vgpu_reg>;
 	regulator-coupled-max-spread = <100000>;
+};
+
+&mfg_async {
+	domain-supply = <&mt6358_vsram_gpu_reg>;
+};
+
+&mfg {
+	domain-supply = <&mt6358_vgpu_reg>;
 };
 
 &i2c3 {
