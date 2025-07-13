@@ -39,6 +39,7 @@
 			reg = <0x000>;
 			dynamic-power-coefficient = <85>;
 			capacity-dmips-mhz = <495>;
+			cpu-idle-states = <&CPU_SLEEP &CLUSTER_SLEEP>;
 			i-cache-size = <32768>;
 			i-cache-line-size = <64>;
 			i-cache-sets = <256>;
@@ -55,6 +56,7 @@
 			reg = <0x100>;
 			dynamic-power-coefficient = <85>;
 			capacity-dmips-mhz = <495>;
+			cpu-idle-states = <&CPU_SLEEP &CLUSTER_SLEEP>;
 			i-cache-size = <32768>;
 			i-cache-line-size = <64>;
 			i-cache-sets = <256>;
@@ -71,6 +73,7 @@
 			reg = <0x200>;
 			dynamic-power-coefficient = <85>;
 			capacity-dmips-mhz = <495>;
+			cpu-idle-states = <&CPU_SLEEP &CLUSTER_SLEEP>;
 			i-cache-size = <32768>;
 			i-cache-line-size = <64>;
 			i-cache-sets = <256>;
@@ -87,6 +90,7 @@
 			reg = <0x300>;
 			dynamic-power-coefficient = <85>;
 			capacity-dmips-mhz = <495>;
+			cpu-idle-states = <&CPU_SLEEP &CLUSTER_SLEEP>;
 			i-cache-size = <32768>;
 			i-cache-line-size = <64>;
 			i-cache-sets = <256>;
@@ -103,6 +107,7 @@
 			reg = <0x400>;
 			dynamic-power-coefficient = <85>;
 			capacity-dmips-mhz = <495>;
+			cpu-idle-states = <&CPU_SLEEP &CLUSTER_SLEEP>;
 			i-cache-size = <32768>;
 			i-cache-line-size = <64>;
 			i-cache-sets = <256>;
@@ -119,6 +124,7 @@
 			reg = <0x500>;
 			dynamic-power-coefficient = <85>;
 			capacity-dmips-mhz = <495>;
+			cpu-idle-states = <&CPU_SLEEP &CLUSTER_SLEEP>;
 			i-cache-size = <32768>;
 			i-cache-line-size = <64>;
 			i-cache-sets = <256>;
@@ -135,6 +141,7 @@
 			reg = <0x600>;
 			dynamic-power-coefficient = <275>;
 			capacity-dmips-mhz = <1024>;
+			cpu-idle-states = <&CPU_SLEEP &CLUSTER_SLEEP>;
 			i-cache-size = <65536>;
 			i-cache-line-size = <64>;
 			i-cache-sets = <256>;
@@ -151,6 +158,7 @@
 			reg = <0x700>;
 			dynamic-power-coefficient = <275>;
 			capacity-dmips-mhz = <1024>;
+			cpu-idle-states = <&CPU_SLEEP &CLUSTER_SLEEP>;
 			i-cache-size = <65536>;
 			i-cache-line-size = <64>;
 			i-cache-sets = <256>;
@@ -216,6 +224,69 @@
 					cpu = <&cpu7>;
 				};
 			};
+		};
+
+		idle-states {
+			entry-method = "psci";
+
+			/*STANDBY: standby {
+				compatible = "arm,idle-state";
+				arm,psci-suspend-param = <0x00000001>;
+				entry-latency-us = <600>;
+				exit-latency-us = <600>;
+				min-residency-us = <1200>;
+			};*/
+
+			CPU_SLEEP: cpu-sleep {
+				compatible = "arm,idle-state";
+				local-timer-stop;
+				arm,psci-suspend-param = <0x00010001>;
+				entry-latency-us = <600>;
+				exit-latency-us = <600>;
+				min-residency-us = <1200>;
+			};
+
+			CLUSTER_SLEEP: cluster-sleep {
+				compatible = "arm,idle-state";
+				local-timer-stop;
+				arm,psci-suspend-param = <0x01010001>;
+				entry-latency-us = <600>;
+				exit-latency-us = <600>;
+				min-residency-us = <1200>;
+			};
+
+			// TODO: check
+			/*IDLE_DRAM: idledram {
+				compatible = "arm,idle-state";
+				arm,psci-suspend-param = <0x01010002>;
+				entry-latency-us = <800>;
+				exit-latency-us = <1000>;
+				min-residency-us = <2000>;
+			};
+
+			IDLE_SYSPLL: idlesyspll {
+				compatible = "arm,idle-state";
+				arm,psci-suspend-param = <0x01010003>;
+				entry-latency-us = <800>;
+				exit-latency-us = <1000>;
+				min-residency-us = <2000>;
+			};
+
+			IDLE_BUS_26M: idlebus26m {
+				compatible = "arm,idle-state";
+				arm,psci-suspend-param = <0x01010004>;
+				entry-latency-us = <800>;
+				exit-latency-us = <1000>;
+				min-residency-us = <2000>;
+			};
+
+			SUSPEND: suspend {
+				compatible = "arm,idle-state";
+				arm,psci-suspend-param = <0x01010005>;
+				entry-latency-us = <800>;
+				exit-latency-us = <1000>;
+				min-residency-us = <2000>;
+			};*/
 		};
 	};
 
