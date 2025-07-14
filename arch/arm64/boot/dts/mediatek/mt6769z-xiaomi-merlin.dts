@@ -80,7 +80,6 @@
 
 &keyboard {
 	status = "okay";
-
 	pinctrl-names = "default";
 	pinctrl-0 = <&keyboard_pins>;
 	linux,keymap = <MATRIX_KEY(0x00, 0x00, KEY_VOLUMEDOWN)>;
@@ -124,16 +123,13 @@
 	sd-uhs-ddr50;
 	no-mmc;
 	no-sdio;
-
 	cd-gpios = <&pio 18 GPIO_ACTIVE_HIGH>;
-
 	vmmc-supply = <&mt6358_vmch_reg>;
-	vqmcc-suppply = <&mt6358_vmc_reg>;
+	vqmmc-suppply = <&mt6358_vmc_reg>;
 };
 
 &gpu {
 	mali-supply = <&mt6358_vgpu_reg>;
-
 };
 
 &mt6358_vgpu_reg {
