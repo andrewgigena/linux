@@ -60,6 +60,18 @@ config NFC_VIRTUAL_NCI
 
 	  If unsure, say N.
 
+config NFC_ST21NFC
+	tristate "ST Microelectronics ST21NFC NFC Controller Driver"
+	depends on I2C
+	help
+	  ST Microelectronics ST21NFC Near Field Communication controller support.
+
+config NFC_ST54J
+	tristate "ST Microelectronics ST54J ESE driver"
+	depends on SPI && NFC_ST21NFC
+	help
+	  ST Microelectronics ST54J ESE Near Field Communication controller support.
+
 source "drivers/nfc/fdp/Kconfig"
 source "drivers/nfc/pn544/Kconfig"
 source "drivers/nfc/pn533/Kconfig"

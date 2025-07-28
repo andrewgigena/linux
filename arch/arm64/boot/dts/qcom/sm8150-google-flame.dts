@@ -1347,8 +1347,20 @@
 	status = "okay";
 	clock-frequency = <400000>;
 	
-	/* st,st21nfc @ 8 */
-
+	st21nfc: st21nfc@8 {
+		compatible = "st,st21nfc";
+		reg = <0x08>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <47 0>;
+		reset-gpios = <&tlmm 21 GPIO_ACTIVE_HIGH>;
+		irq-gpios = <&tlmm 47 GPIO_ACTIVE_HIGH>;
+		pidle-gpios = <&tlmm 48 GPIO_ACTIVE_HIGH>;
+		clkreq-gpios = <&tlmm 96 GPIO_ACTIVE_HIGH>;
+		clocks = <&rpmhcc RPMH_RF_CLK3>;
+		clock-names = "nfc_ref_clk";
+		st,clk_pinctrl;
+	};
+	
 	max77826: pmic@60 {
 		compatible = "maxim,max77826";
 		status = "okay";
