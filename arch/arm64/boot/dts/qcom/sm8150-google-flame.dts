@@ -1478,8 +1478,77 @@
 &i2c15{
 	status = "okay";
 	clock-frequency = <100000>;
-	/* cirrus,cs35l36 @ 40 */
-	/* cirrus,cs35l36 @ 41 */
+	cs35l36_codec_bottom: cs35l36@40 {
+		/* bottom speaker - portrait right */
+		compatible = "cirrus,cs35l36";
+		reg = <0x40>;
+
+		reset-gpios = <&tlmm 148 GPIO_ACTIVE_HIGH>;
+		irq-gpio = <&tlmm 132 GPIO_ACTIVE_HIGH>;
+
+		interrupt-parent = <&tlmm>;
+		interrupts = <132 IRQ_TYPE_LEVEL_LOW>;
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&cs35l36_reset_bottom &cs35l36_irq_bottom>;
+
+		cirrus,boost-ind-nanohenry = <1000>;
+		cirrus,boost-ctl-select = <0x01>;
+		cirrus,boost-ctl-millivolt = <10000>;
+		cirrus,boost-peak-milliamp = <3700>;
+		cirrus,weak-fet-delay = <0x04>;
+		cirrus,weak-fet-thld = <0x01>;
+		cirrus,temp-warn-threshold = <0x01>;
+		cirrus,multi-amp-mode;
+		cirrus,irq-drive-select = <0x00>;
+		cirrus,irq-gpio-select = <0x00>;
+		
+		// cirrus,amp-gain-zc;
+		// cirrus,ldm-mode-select = <0x01>;
+		// cirrus,pdm-ldm-exit;
+		// cirrus,pdm-ldm-enter;
+		// cirrus,irq-config {
+		// 	cirrus,irq-polarity = <0x00>;
+		// 	cirrus,irq-output-enable = <0x01>;
+		// 	cirrus,irq-src-select = <0x01>;
+		// };
+	};
+
+	cs35l36_codec_top: cs35l36@41 {
+		/* top speaker - portrait left */
+		compatible = "cirrus,cs35l36";
+		reg = <0x41>;
+
+		reset-gpios = <&tlmm 35 GPIO_ACTIVE_HIGH>;
+		irq-gpio = <&tlmm 36 GPIO_ACTIVE_HIGH>;
+
+		interrupt-parent = <&tlmm>;
+		interrupts = <36 IRQ_TYPE_LEVEL_LOW>;
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&cs35l36_reset_top &cs35l36_irq_top>;
+
+		cirrus,boost-ind-nanohenry = <1000>;
+		cirrus,boost-ctl-select = <0x01>;
+		cirrus,boost-ctl-millivolt = <10000>;
+		cirrus,boost-peak-milliamp = <3700>;
+		cirrus,weak-fet-delay = <0x04>;
+		cirrus,weak-fet-thld = <0x01>;
+		cirrus,temp-warn-threshold = <0x01>;
+		cirrus,multi-amp-mode;
+		cirrus,irq-drive-select = <0x00>;
+		cirrus,irq-gpio-select = <0x00>;
+
+		// cirrus,amp-gain-zc;
+		// cirrus,ldm-mode-select = <0x01>;
+		// cirrus,pdm-ldm-exit;
+		// cirrus,pdm-ldm-enter;
+		// cirrus,irq-config {
+		// 	cirrus,irq-polarity = <0x00>;
+		// 	cirrus,irq-output-enable = <0x01>;
+		// 	cirrus,irq-src-select = <0x01>;
+		// };
+	};
 	/* cirrus,cs40l25a @ 43 */
 };
 
